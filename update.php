@@ -1,3 +1,40 @@
+<?php
+
+require 'connect.php';
+$id=$_GET['updateid'];
+
+$sql="select * from `crud` where id=$id;";
+$result=mysqli_query($con,$sql);
+$row=mysqli_fetch_assoc($result);
+$name=$row['name'];
+$email=$row['email'];
+$mobile=$row['mobile'];
+$password=$row['password'];
+
+if(isset($_POST["submit"])){
+    $id1=$_POST['id'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $mobile=$_POST['mobile'];
+    $password=$_POST['password'];
+
+    //This sql is used to update the records
+
+    $sql="update `crud` set id='$id1',name='$name', mobile='$mobile',password='$password' where id=$id;";
+    $result=mysqli_query($con,$sql);
+    if($result){
+        header("location:display.php");
+    }
+    else{
+        die(mysqli_error($con));
+
+    }
+}
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
